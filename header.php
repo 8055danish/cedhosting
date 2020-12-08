@@ -1,9 +1,4 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<?php $current_file_name = basename($_SERVER['PHP_SELF']);?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -20,6 +15,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!---fonts-->
 	<link href='//fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<!---fonts-->
 	<!--script-->
 	<script src="js/modernizr.custom.97074.js"></script>
@@ -64,23 +60,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
-							<li><a href="about.php">About</a></li>
-							<li><a href="services.php">Services</a></li>
-							<li class="dropdown">
+							<li class="<?php echo ($current_file_name=="index.php")? "active":" " ?>"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
+							<li class="<?php echo ($current_file_name=="about.php")? "active":" " ?>"><a href="about.php">About</a></li>
+							<li class="<?php echo ($current_file_name=="services.php")? "active":" " ?>"><a href="services.php">Services</a></li>
+							<li class="<?php echo ($current_file_name=="linuxhosting.php"||$current_file_name=="wordpresshosting.php"||$current_file_name=="windowshosting.php"||$current_file_name=="cmshosting.php")? "active":" " ?> dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="linuxhosting.php">Linux hosting</a></li>
-									<li><a href="wordpresshosting.php">WordPress Hosting</a></li>
-									<li><a href="windowshosting.php">Windows Hosting</a></li>
-									<li><a href="cmshosting.php">CMS Hosting</a></li>
+									<li class="<?php echo ($current_file_name=="linuxhosting.php")? "active":" " ?>"><a href="linuxhosting.php">Linux hosting</a></li>
+									<li class="<?php echo ($current_file_name=="wordpresshosting.php")? "active":" " ?>"><a href="wordpresshosting.php">WordPress Hosting</a></li>
+									<li class="<?php echo ($current_file_name=="windowshosting.php")? "active":" " ?>"><a href="windowshosting.php">Windows Hosting</a></li>
+									<li class="<?php echo ($current_file_name=="cmshosting.php")? "active":" " ?>"><a href="cmshosting.php">CMS Hosting</a></li>
 								</ul>			
 							</li>
-							<li><a href="pricing.php">Pricing</a></li>
-							<li><a href="blog.php">Blog</a></li>
-							<li><a href="contact.php">Contact</a></li>
-							<li><a href="codes.php">Cart</a></li>
-							<li><a href="login.php">Login</a></li>
+							<li class="<?php echo ($current_file_name=="pricing.php")? "active":" " ?>"><a href="pricing.php">Pricing</a></li>
+							<li class="<?php echo ($current_file_name=="blog.php")? "active":" " ?>"><a href="blog.php">Blog</a></li>
+							<li class="<?php echo ($current_file_name=="contact.php")? "active":" " ?>"><a href="contact.php">Contact</a></li>
+							<li class="<?php echo ($current_file_name=="codes.php")? "active":" " ?>"><a href="codes.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+							<li class="<?php echo ($current_file_name=="login.php")? "active":" " ?>"><a href="login.php">Login</a></li>
 						</ul>
 
 					</div><!-- /.navbar-collapse -->
