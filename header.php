@@ -1,3 +1,29 @@
+<?php session_start(); ?>
+<?php
+include "class/user.php";
+$msg="";
+if(isset($_POST['register'])){
+	$email = $_POST['email'];
+	$name = $_POST['name'];
+	$mobile = $_POST['mobile'];
+	$password = $_POST['password'];
+	$cpassword = $_POST['cpassword'];
+	$select = $_POST['select'];
+	$sinput = $_POST['sinput'];
+
+	$user = new user();
+	$msg = $user->register($email,$name,$mobile,$password,$select,$sinput);
+
+}
+if(isset($_POST['login'])){
+  $username = trim($_POST['email']," ");
+  $password = $_POST['password'];
+  $User = new user();
+  $msg = $User->login($username,$password);
+  echo $msg;
+}
+
+ ?>
 <?php $current_file_name = basename($_SERVER['PHP_SELF']);?>
 <!DOCTYPE HTML>
 <html>
@@ -16,26 +42,29 @@
 	<link href='//fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<!---fonts-->
 	<!--script-->
+	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/modernizr.custom.97074.js"></script>
 	<script src="js/jquery.chocolat.js"></script>
+	<script src="js/myjsfunction.js"></script>
 	<link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="css/mycss.css" type="text/css" media="screen">
 	<!--lightboxfiles-->
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(function() {
 			$('.team a').Chocolat();
 		});
-	</script>	
+	</script>	 -->
 	<script type="text/javascript" src="js/jquery.hoverdir.js"></script>	
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(function() {
 
 			$(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
 
 		});
-	</script>						
+	</script> -->						
 	<!--script-->
 </head>
 <body>

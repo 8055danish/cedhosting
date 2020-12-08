@@ -27,7 +27,6 @@
 						<textarea type="text"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
 						<input type="submit" value="Submit" >
 						<input type="reset" value="Clear" >
-
 					</form>
 				</div>
 				<div class="clearfix"> </div>
