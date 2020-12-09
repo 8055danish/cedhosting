@@ -7,3 +7,6 @@
 .form-control{
 	width:97%;
 }
+#alert-div{
+	display: none;
+}

@@ -1,11 +1,31 @@
 		<?php require "header.php"; ?>
+		<?php
+			include "class/user.php";
+			include "class/dbcon.php";
+			$msg="";
+			if(isset($_POST['register'])){
+				$email = trim($_POST['email']," ");
+				$name = trim($_POST['name']," ");
+				$mobile = $_POST['mobile'];
+				$password = $_POST['password'];
+				$cpassword = $_POST['cpassword'];
+				$select = $_POST['select'];
+				$sinput = trim($_POST['sinput']," ");
+				$database = new Database();
+				$db = $database->getConnection();
+				$user = new user();
+				$msg = $user->register($db,$email,$name,$mobile,$password,$select,$sinput);
+			}
+ 		?>
 		<!---login--->
 		<div class="content">
-			<?php if($msg!=""): ?>
-			<div class="container text-center alert alert-danger alert-dismissible" role="alert"><?php echo $msg;$msg=""; ?>
+			<?php if($msg!=""):?>
+			<div class="container text-center alert alert-danger alert-dismissible" role="alert">
+				<button data-dismiss="alert" class="close" type="button">x</button>
+				<?php echo $msg;$msg=""; ?>	
 			</div>
 			<?php endif; ?>
-			<div class="container text-center alert alert-danger alert-dismissible hide" id="alert-div" role="alert">
+			<div class="container text-center alert alert-danger alert-dismissible" id="alert-div" role="alert">
 			</div>
 			<!-- registration -->
 			<div class="main-1">
@@ -16,7 +36,7 @@
 								<h3>personal information</h3>
 								<div>
 									<span>Email Address<label>*</label></span>
-									<input type="text" id="email" name="email"> 
+									<input type="text" placeholder="Enter Email" id="email" name="email"> 
 								</div>
 								<div>
 									<span>Full Name<label>*</label></span>
@@ -24,7 +44,7 @@
 								</div>
 								<div>
 									<span>Mobile<label>*</label></span>
-									<input type="text" id="mobile" name="mobile" maxlength="10" onkeypress="return /[0-9]/i.test(event.key)"> 
+									<input type="text" id="mobile" placeholder="Enter mobile" name="mobile" maxlength="11" onkeypress="return /[0-9]/i.test(event.key)"> 
 								</div>
 								<div class="clearfix"> </div>
 								<a class="news-letter" href="#"></a>
@@ -33,11 +53,11 @@
 								<h3>login information</h3>
 								<div>
 									<span>Password<label>*</label></span>
-									<input type="password" id="password" name="password">
+									<input type="password" placeholder="Enter Password" id="password" name="password">
 								</div>
 								<div>
 									<span>Confirm Password<label>*</label></span>
-									<input type="password" id="cpassword" name="cpassword">
+									<input type="password" placeholder="Enter Confirm Password" id="cpassword" name="cpassword">
 								</div>
 								<div>
 									<span>Security Question<label>*</label></span>
@@ -51,7 +71,7 @@
 								</div>
 								<div>
 									<span>Answer<label>*</label></span>
-									<input id="sinput" name="sinput" type="text"> 
+									<input id="sinput" placeholder="Enter Security Answer" name="sinput" type="text"> 
 								</div>
 							</div>
 							<div class="clearfix"> </div>

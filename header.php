@@ -1,29 +1,4 @@
 <?php session_start(); ?>
-<?php
-include "class/user.php";
-$msg="";
-if(isset($_POST['register'])){
-	$email = $_POST['email'];
-	$name = $_POST['name'];
-	$mobile = $_POST['mobile'];
-	$password = $_POST['password'];
-	$cpassword = $_POST['cpassword'];
-	$select = $_POST['select'];
-	$sinput = $_POST['sinput'];
-
-	$user = new user();
-	$msg = $user->register($email,$name,$mobile,$password,$select,$sinput);
-
-}
-if(isset($_POST['login'])){
-  $username = trim($_POST['email']," ");
-  $password = $_POST['password'];
-  $User = new user();
-  $msg = $User->login($username,$password);
-  echo $msg;
-}
-
- ?>
 <?php $current_file_name = basename($_SERVER['PHP_SELF']);?>
 <!DOCTYPE HTML>
 <html>
@@ -105,7 +80,8 @@ if(isset($_POST['login'])){
 							<li class="<?php echo ($current_file_name=="blog.php")? "active":" " ?>"><a href="blog.php">Blog</a></li>
 							<li class="<?php echo ($current_file_name=="contact.php")? "active":" " ?>"><a href="contact.php">Contact</a></li>
 							<li class="<?php echo ($current_file_name=="codes.php")? "active":" " ?>"><a href="codes.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-							<li class="<?php echo ($current_file_name=="login.php")? "active":" " ?>"><a href="login.php">Login</a></li>
+							<?php if(!isset($_SESSION['login'])): ?><li class="<?php echo ($current_file_name=="login.php")? "active":" " ?>"><a href="login.php">Login/Register</a></li><?php endif; ?>
+							<?php if(isset($_SESSION['login'])): ?><li><a href="logout.php">Logout</a></li><?php endif; ?>
 						</ul>
 
 					</div><!-- /.navbar-collapse -->
