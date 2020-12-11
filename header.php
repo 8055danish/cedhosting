@@ -1,6 +1,6 @@
 <?php
 $current_file_name = basename($_SERVER['PHP_SELF']);
-include "class/user.php";
+include "class/query.php";
 $ob = new Query;
 $msg = '';
 $classname = '';

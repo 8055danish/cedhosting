@@ -1,5 +1,5 @@
 <?php
-include "../class/user.php";
+include "../class/query.php";
 $ob = new Query;
 $msg = '';
 $id = "";
@@ -138,7 +138,7 @@ if (isset($_POST['Update'])) {
                                           </tr>
                                     <?php endforeach;?>
                                     <?php else:echo "<h3 class='text-center'>No Record Found !!!</h3>";?>
-																																																																													                                    <?php endif;?>
+																																																																														                                    <?php endif;?>
                               </tbody>
                         </table>
                   </div>

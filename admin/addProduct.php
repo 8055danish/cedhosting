@@ -1,5 +1,5 @@
 <?php
-include "../class/user.php";
+include "../class/query.php";
 $ob = new Query;
 $msg = '';
 if (isset($_POST['addProduct'])) {
