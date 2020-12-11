@@ -1,5 +1,52 @@
-<?php session_start(); ?>
-<?php $current_file_name = basename($_SERVER['PHP_SELF']);?>
+<?php
+$current_file_name = basename($_SERVER['PHP_SELF']);
+include "class/user.php";
+$ob = new Query;
+$msg = '';
+$classname = '';
+if (isset($_POST['login'])) {
+	$email = trim($_POST['email'], " ");
+	$password = $_POST['password'];
+	$user = $ob->getData('tbl_user', '', ['email' => $email, 'op' => 'AND', 'password' => md5($password)]);
+	if ($user[0]['is_admin'] == '1') {
+		$_SESSION['alogin'] = 'true';
+		header("location:admin/index.php");
+	} else if ($user[0]['email_approved'] == '1') {
+		$_SESSION['ulogin'] = 'true';
+		$_SESSION['name'] = $user[0]['name'];
+		header("location:index.php");
+	} else if ($user[0]['email_approved'] == '0') {
+		$_SESSION['user_id'] = $user[0]['id'];
+		$msg = $ob->emailverification($email, $user[0]['name'], $user[0]['id']);
+	} else {
+		$msg = "Incorrect Email/Password";
+	}
+}
+if (isset($_POST['register'])) {
+	$email = trim($_POST['email'], " ");
+	$name = trim($_POST['name'], " ");
+	$mobile = $_POST['mobile'];
+	$password = $_POST['password'];
+	$cpassword = $_POST['cpassword'];
+	$select = $_POST['select'];
+	$sinput = trim($_POST['sinput'], " ");
+	$user = $ob->getData('tbl_user', '', ['email' => $email]);
+
+	if ($user != 0) {
+		// if user exists
+		if (strcasecmp($user[0]['email'], $email) == "0") {
+			$msg = "Email already exists";
+			$classname = "danger";
+		}
+
+	} else {
+		$ob->insertData('tbl_user', ['email' => $email, 'name' => $name, 'mobile' => $mobile, 'password' => md5($password), 'security_question' => $select, 'security_answer' => $sinput]);
+		$msg = "Registration Successful";
+		$classname = "success";
+	}
+}
+
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,7 +55,7 @@
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="Planet Hosting Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	<meta name="keywords" content="Planet Hosting Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script src="js/jquery-1.11.1.min.js"></script>
@@ -24,6 +71,7 @@
 	<script src="js/modernizr.custom.97074.js"></script>
 	<script src="js/jquery.chocolat.js"></script>
 	<script src="js/myjsfunction.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="css/mycss.css" type="text/css" media="screen">
 	<!--lightboxfiles-->
@@ -32,14 +80,14 @@
 			$('.team a').Chocolat();
 		});
 	</script>	 -->
-	<script type="text/javascript" src="js/jquery.hoverdir.js"></script>	
+	<script type="text/javascript" src="js/jquery.hoverdir.js"></script>
 	<!-- <script type="text/javascript">
 		$(function() {
 
 			$(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
 
 		});
-	</script> -->						
+	</script> -->
 	<!--script-->
 </head>
 <body>
@@ -55,7 +103,7 @@
 							<i class="icon-bar"></i>
 							<i class="icon-bar"></i>
 							<i class="icon-bar"></i>
-						</button>				  
+						</button>
 						<div class="navbar-brand">
 							<h1><a href="index.php"><span class="navbar-brand-left">Ced</span>&nbsp;<span class="navbar-brand-right"><span>Hosting</span></a></h1>
 						</div>
@@ -64,24 +112,25 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="<?php echo ($current_file_name=="index.php")? "active":" " ?>"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
-							<li class="<?php echo ($current_file_name=="about.php")? "active":" " ?>"><a href="about.php">About</a></li>
-							<li class="<?php echo ($current_file_name=="services.php")? "active":" " ?>"><a href="services.php">Services</a></li>
-							<li class="<?php echo ($current_file_name=="linuxhosting.php"||$current_file_name=="wordpresshosting.php"||$current_file_name=="windowshosting.php"||$current_file_name=="cmshosting.php")? "active":" " ?> dropdown">
+							<li class="<?php echo ($current_file_name == "index.php") ? "active" : " " ?>"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
+							<li class="<?php echo ($current_file_name == "about.php") ? "active" : " " ?>"><a href="about.php">About</a></li>
+							<li class="<?php echo ($current_file_name == "services.php") ? "active" : " " ?>"><a href="services.php">Services</a></li>
+							<li class="<?php echo ($current_file_name == "linuxhosting.php" || $current_file_name == "wordpresshosting.php" || $current_file_name == "windowshosting.php" || $current_file_name == "cmshosting.php") ? "active" : " " ?> dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 								<ul class="dropdown-menu">
-									<li class="<?php echo ($current_file_name=="linuxhosting.php")? "active":" " ?>"><a href="linuxhosting.php">Linux hosting</a></li>
-									<li class="<?php echo ($current_file_name=="wordpresshosting.php")? "active":" " ?>"><a href="wordpresshosting.php">WordPress Hosting</a></li>
-									<li class="<?php echo ($current_file_name=="windowshosting.php")? "active":" " ?>"><a href="windowshosting.php">Windows Hosting</a></li>
-									<li class="<?php echo ($current_file_name=="cmshosting.php")? "active":" " ?>"><a href="cmshosting.php">CMS Hosting</a></li>
-								</ul>			
+									<?php $products = $ob->getData('tbl_product', ['prod_name', 'link'], ['prod_parent_id' => 1]);?>
+									<?php foreach ($products as $key => $value): ?>
+										<?php $link = $value['link'];?>
+										<li class="<?php echo ($current_file_name == $link) ? "active" : " " ?>"><a href="<?php echo $link; ?>"><?php echo $value['prod_name']; ?></a></li>
+									<?php endforeach;?>
+								</ul>
 							</li>
-							<li class="<?php echo ($current_file_name=="pricing.php")? "active":" " ?>"><a href="pricing.php">Pricing</a></li>
-							<li class="<?php echo ($current_file_name=="blog.php")? "active":" " ?>"><a href="blog.php">Blog</a></li>
-							<li class="<?php echo ($current_file_name=="contact.php")? "active":" " ?>"><a href="contact.php">Contact</a></li>
-							<li class="<?php echo ($current_file_name=="codes.php")? "active":" " ?>"><a href="codes.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-							<?php if(!isset($_SESSION['login'])): ?><li class="<?php echo ($current_file_name=="login.php")? "active":" " ?>"><a href="login.php">Login/Register</a></li><?php endif; ?>
-							<?php if(isset($_SESSION['login'])): ?><li><a href="logout.php">Logout</a></li><?php endif; ?>
+							<li class="<?php echo ($current_file_name == "pricing.php") ? "active" : " " ?>"><a href="pricing.php">Pricing</a></li>
+							<li class="<?php echo ($current_file_name == "blog.php") ? "active" : " " ?>"><a href="blog.php">Blog</a></li>
+							<li class="<?php echo ($current_file_name == "contact.php") ? "active" : " " ?>"><a href="contact.php">Contact</a></li>
+							<li class="<?php echo ($current_file_name == "codes.php") ? "active" : " " ?>"><a href="codes.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+							<?php if (!isset($_SESSION['ulogin'])): ?><li class="<?php echo ($current_file_name == "login.php") ? "active" : " " ?>"><a href="login.php">Login/Register</a></li><?php endif;?>
+							<?php if (isset($_SESSION['ulogin'])): ?><li><a href="logout.php">Logout</a></li><?php endif;?>
 						</ul>
 
 					</div><!-- /.navbar-collapse -->

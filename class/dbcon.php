@@ -1,23 +1,22 @@
 <?php
 
-class Database{
-    
-    private $host = "localhost";
-    private $db_name = "cedhosting";
-    private $username = "root";
-    private $password = "";
-    public $conn;
-  
-    // get the database connection
-    public function getConnection(){
-        $this->conn = null;
-        try{
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-        }catch(PDOException $exception){
-            echo "Connection error: " . $exception->getMessage();
-        }
-        return $this->conn;
-    }
+class Database {
+
+	private $_host;
+	private $_username;
+	private $_password;
+	public $_dbname;
+
+	// get the database connection
+	protected function connect() {
+
+		$this->_host = 'localhost';
+		$this->_user = 'root';
+		$this->_password = '';
+		$this->_dbname = 'cedhosting';
+
+		return (new mysqli($this->_host, $this->_user, $this->_password, $this->_dbname));
+	}
 }
 
 ?>
