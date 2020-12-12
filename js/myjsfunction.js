@@ -82,7 +82,7 @@ function validateForm2(){
 		return false;
 	}
 	if (document.forms["form2"]["email"].value !="") {
-		var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,4}$/i.test($("#email").val());
+		var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test($("#email").val());
 		if(!re){
 			swal("Email must be valid");
 			$("#email").css({border:'1px solid red'});

@@ -152,6 +152,46 @@ class Query extends Database {
 
 		}
 	}
+	function selectJoin($table1, $table2, $fields, $conditions) {
+		$sql = 'SELECT ';
+		if ($fields != '') {
+			$j = 1;
+			$count0 = count($fields);
+			$count1 = count($conditions);
+			foreach ($fields as $key => $value) {
+				if ($j == $count0) {
 
+					$sql .= "`$key`.$value";
+				} else {
+					$sql .= "`$key`.$value,";
+				}
+				$j++;
+			}
+			$k = 1;
+			$sql .= " FROM ";
+
+			$sql .= $table1 . " JOIN " . $table2 . " ON ";
+
+			foreach ($conditions as $key => $value) {
+				if ($k == $count1) {
+					$sql .= "=`$key`.$value";
+				} else {
+					$sql .= "`$key`.$value";
+				}
+				$k++;
+			}
+		}
+		//return $this->connect()->query($sql);
+		$result = $this->connect()->query($sql);
+		$data = array();
+		if ($result->num_rows > 0) {
+			while ($row = $result->fetch_assoc()) {
+				$data[] = $row;
+			}
+			return $data;
+		} else {
+			return 0;
+		}
+	}
 }
 ?>

@@ -2,6 +2,7 @@
 include "../class/query.php";
 $ob = new Query;
 $msg = '';
+$classname = '';
 $id = "";
 $select1 = '';
 $prod_name = '';
@@ -35,6 +36,7 @@ if (isset($_POST['Add'])) {
 	$u = $ob->getData('tbl_product', '', ['prod_name' => ucfirst($prod_name)]);
 	if ($u) {
 		$msg = "Product Already Exist";
+		$classname = "danger";
 	} else {
 		$ob->insertData('tbl_product', ['prod_parent_id' => $parent_id, 'prod_name' => $prod_name, 'link' => $link, 'prod_available' => $available]);
 		$msg = "Added Succesfully";
@@ -49,28 +51,35 @@ if (isset($_POST['Update'])) {
 	$prod_name = $_POST['prod_name'];
 	$link = $_POST['link'];
 	$available = $_POST['select2'];
-	$result1 = $ob->updateData('tbl_product', ['prod_name' => $prod_name, 'link' => $link, 'prod_available' => $available], ['id' => $id]);
-	$msg = "Product Updated Succesfully";
-	$btnvalue = "Add";
-	$select1 = '';
-	$prod_name = '';
-	$link = '';
-	$select2 = '';
+	$u = $ob->getData('tbl_product', '', ['prod_name' => ucfirst($prod_name)]);
+	if ($u) {
+		$msg = "Product Already Exist";
+		$classname = "danger";
+	} else {
+		$result1 = $ob->updateData('tbl_product', ['prod_name' => $prod_name, 'link' => $link, 'prod_available' => $available], ['id' => $id]);
+		$msg = "Product Updated Succesfully";
+		$classname = "success";
+		$btnvalue = "Add";
+		$select1 = '';
+		$prod_name = '';
+		$link = '';
+		$select2 = '';
+	}
 
 }
 ?>
 
 <?php require "header.php";?>
 <main class="content">
-    <?php if ($msg != ""): ?>
-     <div class="alert alert-success alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-      </button>
-      <div class="text-center alert-message">
-            <?php echo $msg; ?>
+  <?php if ($msg != ""): ?>
+       <div class="alert alert-<?php echo $classname; ?> alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="text-center alert-message">
+                  <?php echo $msg; ?>
+            </div>
       </div>
-</div>
 <?php endif;?>
 <div class="container-fluid p-0">
 
@@ -110,7 +119,7 @@ if (isset($_POST['Update'])) {
                               <!--  <h5 class="card-title">Categories Table</h5> -->
                               <!-- <h6 class="card-subtitle text-muted">Use contextual classes to color table rows or individual cells.</h6> -->
                         </div>
-                        <table class="table">
+                        <table class="table table-bordered">
                               <thead>
                                     <tr>
                                           <th style="width:5%;">Id</th>
@@ -138,7 +147,7 @@ if (isset($_POST['Update'])) {
                                           </tr>
                                     <?php endforeach;?>
                                     <?php else:echo "<h3 class='text-center'>No Record Found !!!</h3>";?>
-																																																																														                                    <?php endif;?>
+													                                    <?php endif;?>
                               </tbody>
                         </table>
                   </div>

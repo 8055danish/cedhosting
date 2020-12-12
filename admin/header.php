@@ -28,7 +28,7 @@
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.php">
-					<span class="align-middle">AdminKit</span>
+					<span class="align-middle">Admin Panel</span>
 				</a>
 
 				<ul class="sidebar-nav">
@@ -42,14 +42,14 @@
 						</a>
 					</li>
 
-					<li class="sidebar-item <?php echo ($current_file_name == "createCategory.php" || $current_file_name == "addProduct.php") ? "active" : " " ?>">
+					<li class="sidebar-item <?php echo ($current_file_name == "createCategory.php" || $current_file_name == "addProduct.php" || $current_file_name == "viewProduct.php") ? "active" : " " ?>">
 						<a href="#ui1" data-toggle="collapse" class="sidebar-link collapsed">
 							<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Products</span>
 						</a>
 						<ul id="ui1" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
 							<li class="sidebar-item <?php echo ($current_file_name == "createCategory.php") ? "active" : " " ?>"><a class="sidebar-link" href="createCategory.php">Create Category</a></li>
 							<li class="sidebar-item <?php echo ($current_file_name == "addProduct.php") ? "active" : " " ?>"><a class="sidebar-link" href="addProduct.php">Add Product</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="ui-general.php">View Products</a></li>
+							<li class="sidebar-item <?php echo ($current_file_name == "viewProduct.php") ? "active" : " " ?>"><a class="sidebar-link" href="viewProduct.php">View Products</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="ui-grid.php">Create New Offers</a></li>
 						</ul>
 					</li>

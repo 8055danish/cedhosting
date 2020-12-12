@@ -2,6 +2,7 @@
 include "../class/query.php";
 $ob = new Query;
 $msg = '';
+$classname = '';
 if (isset($_POST['addProduct'])) {
 	$select = $_POST['select'];
 	$input1 = $_POST['input1'];
@@ -75,7 +76,7 @@ if (isset($_POST['addProduct'])) {
 								</div>
 								<div class="form-group col-md-4">
 									<label for="input1">Enter Product Name <span class="form-required">*</span></label>
-									<input type="text" name="input1" class="form-control" id="input1" placeholder="Enter Product Name">
+									<input type="text" name="input1" class="form-control" id="input1" placeholder="Enter Product Name" >
 								</div>
 								<div class="form-group col-md-4">
 									<label for="input2">Page Url <span class="form-required">*</span></label>
@@ -94,11 +95,11 @@ if (isset($_POST['addProduct'])) {
 							<div class="form-row">
 								<div class="form-group col-md-4">
 									<label for="input3">Enter Monthly Price <span class="form-required">*</span></label>
-									<input type="text" class="form-control" id="input3" name="input3" placeholder="Enter Monthly Price" onkeypress="return /[0-9.]/i.test(event.key)">
+									<input type="text" class="form-control" id="input3" maxlength="15" name="input3" placeholder="Enter Monthly Price">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="input4">Enter Annual Price <span class="form-required">*</span></label>
-									<input type="text" class="form-control" id="input4" name="input4" placeholder="Enter Annual Price" onkeypress="return /[0-9.]/i.test(event.key)">
+									<input type="text" maxlength="15" class="form-control" id="input4" name="input4" placeholder="Enter Annual Price">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="input5">SKU <span class="form-required">*</span></label>
@@ -117,12 +118,12 @@ if (isset($_POST['addProduct'])) {
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="input6">Web Space(in GB) <span class="form-required">*</span></label>
-									<input type="text" class="form-control" id="input6" name="input6" placeholder="Ex: 0.5 for 512 MB" onkeypress="return /[0-9.]/i.test(event.key)">
+									<input type="text" class="form-control" id="input6" name="input6" placeholder="Ex: 0.5 for 512 MB" maxlength="5">
 								</select>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="input7">Bandwidth(in GB) <span class="form-required">*</span></label>
-								<input type="text" class="form-control" id="input7" name="input7" placeholder="Ex: .5 for 512" onkeypress="return /[0-9.]/i.test(event.key)">
+								<input type="text" class="form-control" id="input7" name="input7" placeholder="Ex: .5 for 512" maxlength="5">
 							</div>
 							<div class="form-group col-md-6">
 								<label for="input8">Free Domain <span class="form-required">*</span></label>
@@ -134,7 +135,7 @@ if (isset($_POST['addProduct'])) {
 							</div>
 							<div class="form-group col-md-6">
 								<label for="input10">Mailbox <span class="form-required">*</span></label>
-								<input type="text" class="form-control" id="input10" name="input10" placeholder="Enter Number of Mailbox,0 if none" onkeypress="return /[0-9]/i.test(event.key)">
+								<input type="text" class="form-control" id="input10" name="input10" placeholder="Enter Number of Mailbox,0 if none">
 							</div>
 						</div>
 
