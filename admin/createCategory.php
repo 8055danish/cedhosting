@@ -6,7 +6,7 @@ $classname = '';
 $id = "";
 $select1 = '';
 $prod_name = '';
-$link = '';
+$html = '';
 $select2 = '';
 $btnvalue = "Add";
 if (isset($_GET['action'])) {
@@ -16,7 +16,7 @@ if (isset($_GET['action'])) {
 		$select1 = $data[0]['id'];
 		$id = $data[0]['id'];
 		$prod_name = $data[0]['prod_name'];
-		$link = $data[0]['link'];
+		$html = $data[0]['html'];
 		$select2 = $data[0]['prod_available'];
 		$btnvalue = "Update";
 	}
@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
 if (isset($_POST['Add'])) {
 	$parent_id = $_POST['select1'];
 	$prod_name = $_POST['prod_name'];
-	$link = $_POST['link'];
+	$html = $_POST['html'];
 	$available = $_POST['select2'];
 	$ob = new Query;
 	$u = $ob->getData('tbl_product', '', ['prod_name' => ucfirst($prod_name)]);
@@ -38,31 +38,31 @@ if (isset($_POST['Add'])) {
 		$msg = "Product Already Exist";
 		$classname = "danger";
 	} else {
-		$ob->insertData('tbl_product', ['prod_parent_id' => $parent_id, 'prod_name' => $prod_name, 'link' => $link, 'prod_available' => $available]);
+		$ob->insertData('tbl_product', ['prod_parent_id' => $parent_id, 'prod_name' => $prod_name, 'html' => $html, 'prod_available' => $available]);
 		$msg = "Added Succesfully";
 		$select1 = '';
 		$prod_name = '';
-		$link = '';
+		$html = '';
 		$select2 = '';
 	}
 }
 if (isset($_POST['Update'])) {
 	$parent_id = $_POST['select1'];
-	$prod_name = $_POST['prod_name'];
-	$link = $_POST['link'];
+	$prod_name = trim($_POST['prod_name'], " ");
+	$html = trim($_POST['html'], " ");
 	$available = $_POST['select2'];
 	$u = $ob->getData('tbl_product', '', ['prod_name' => ucfirst($prod_name)]);
 	if ($u) {
 		$msg = "Product Already Exist";
 		$classname = "danger";
 	} else {
-		$result1 = $ob->updateData('tbl_product', ['prod_name' => $prod_name, 'link' => $link, 'prod_available' => $available], ['id' => $id]);
+		$result1 = $ob->updateData('tbl_product', ['prod_name' => $prod_name, 'html' => $html, 'prod_available' => $available], ['id' => $id]);
 		$msg = "Product Updated Succesfully";
 		$classname = "success";
 		$btnvalue = "Add";
 		$select1 = '';
 		$prod_name = '';
-		$link = '';
+		$html = '';
 		$select2 = '';
 	}
 
@@ -100,7 +100,7 @@ if (isset($_POST['Update'])) {
                                           <option value="1" <?php echo ($select1 != '') ? 'selected' : '' ?>>Hosting</option>
                                     </select>
                                     <input type="text" name="prod_name" id="prod_name" placeholder="Enter Product Name" value="<?php echo $prod_name; ?>" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
-                                    <input type="text" name="link" class="form-control mb-2 mr-sm-2" placeholder="Enter Link Address" id="inlineFormInputName2" value="<?php echo $link; ?>" >
+                                    <input type="text" name="html" class="form-control mb-2 mr-sm-2" placeholder="Enter html Address" id="inlineFormInputName2" value="<?php echo $html; ?>" >
                                     <select name="select2" id="select2" class="custom-select mb-2">
                                           <option  value="">--Is Available--</option>
                                           <option value="1" <?php echo ($select2 == '1') ? 'selected' : '' ?>>Yes</option>
@@ -124,7 +124,7 @@ if (isset($_POST['Update'])) {
                                     <tr>
                                           <th style="width:5%;">Id</th>
                                           <th style="width:20%">Product Name</th>
-                                          <th style="width:30%">Link</th>
+                                          <th style="width:30%">html</th>
                                           <th style="width:25%">Product Available</th>
                                           <th class="d-none d-md-table-cell" style="width:20%">Date of Birth</th>
                                           <th>Actions</th>
@@ -137,7 +137,7 @@ if (isset($_POST['Update'])) {
                                           <tr  class="table-success">
                                                 <td><?php echo ++$c; ?></td>
                                                 <td><?php echo $value['prod_name']; ?></td>
-                                                <td><?php echo $value['link']; ?></td>
+                                                <td><?php echo $value['html']; ?></td>
                                                 <td><?php echo ($value['prod_available'] == '1') ? "Available" : "Not Avaible" ?></td>
                                                 <td class="d-none d-md-table-cell"><?php echo $value['prod_launch_date']; ?></td>
                                                 <td class="table-action">
@@ -147,7 +147,7 @@ if (isset($_POST['Update'])) {
                                           </tr>
                                     <?php endforeach;?>
                                     <?php else:echo "<h3 class='text-center'>No Record Found !!!</h3>";?>
-													                                    <?php endif;?>
+																																						                                    <?php endif;?>
                               </tbody>
                         </table>
                   </div>

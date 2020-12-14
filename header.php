@@ -1,3 +1,8 @@
+<?php session_start();?>
+<?php if (isset($_SESSION['alogin'])) {
+	header("location:logout.php");
+}
+?>
 <?php
 $current_file_name = basename($_SERVER['PHP_SELF']);
 include "class/query.php";
@@ -118,10 +123,10 @@ if (isset($_POST['register'])) {
 							<li class="<?php echo ($current_file_name == "linuxhosting.php" || $current_file_name == "wordpresshosting.php" || $current_file_name == "windowshosting.php" || $current_file_name == "cmshosting.php") ? "active" : " " ?> dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 								<ul class="dropdown-menu">
-									<?php $products = $ob->getData('tbl_product', ['prod_name', 'link'], ['prod_parent_id' => 1]);?>
+									<?php $products = $ob->getData('tbl_product', ['prod_name', 'html'], ['prod_parent_id' => 1]);?>
 									<?php foreach ($products as $key => $value): ?>
-										<?php $link = $value['link'];?>
-										<li class="<?php echo ($current_file_name == $link) ? "active" : " " ?>"><a href="<?php echo $link; ?>"><?php echo $value['prod_name']; ?></a></li>
+										<?php $html = $value['html'];?>
+										<li class="<?php echo ($current_file_name == $html) ? "active" : " " ?>"><a href="<?php echo $html; ?>"><?php echo $value['prod_name']; ?></a></li>
 									<?php endforeach;?>
 								</ul>
 							</li>

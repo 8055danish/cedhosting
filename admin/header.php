@@ -28,7 +28,7 @@
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.php">
-					<span class="align-middle">Admin Panel</span>
+					<img src="img/icons/icon-48x48.png" alt="image missing">&nbsp;<span class="align-middle">Admin Panel</span>
 				</a>
 
 				<ul class="sidebar-nav">
