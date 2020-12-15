@@ -1,6 +1,11 @@
 .form-required{
-	color:red;
+	color:tomato;
 }
 .has-Error{
 	border: 1px solid tomato;
+}
+.disable{
+	cursor: not-allowed;
+	pointer-events: none;
+	background-color: rgb(70, 70, 70);
 }

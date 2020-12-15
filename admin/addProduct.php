@@ -19,14 +19,13 @@ $btnvalue = "Add Product";
 if (isset($_GET['action'])) {
 	if ($_GET['action'] == 'edit') {
 		$result = $ob->selectJoin2('tbl_product', 'tbl_product_description', ['tbl_product' => '*', 'tbl_product_description' => '*'], ['tbl_product' => 'id', 'tbl_product_description' => 'prod_id'], 'AND', ['tbl_product.id', $_GET['id']]);
-		$res = mysqli_fetch_assoc($result);
-		$select = $res['prod_parent_id'];
-		$input1 = $res['prod_name'];
-		$input2 = $res['html'];
-		$input3 = $res['mon_price'];
-		$input4 = $res['annual_price'];
-		$input5 = $res['sku'];
-		$desc = $res['description'];
+		$select = $result[0]['prod_parent_id'];
+		$input1 = $result[0]['prod_name'];
+		$input2 = $result[0]['html'];
+		$input3 = $result[0]['mon_price'];
+		$input4 = $result[0]['annual_price'];
+		$input5 = $result[0]['sku'];
+		$desc = $result[0]['description'];
 		$desc_dec = json_decode($desc);
 		$input6 = $desc_dec->space;
 		$input7 = $desc_dec->bandwidth;
@@ -62,35 +61,41 @@ if (isset($_POST['addProduct'])) {
 		}
 	}
 	if ($btnvalue == 'Add Product') {
-		$select = $_POST['select'];
-		$input1 = trim($_POST['input1'], " ");
-		$input2 = $_POST['input2'];
-		$input3 = $_POST['input3'];
-		$input4 = $_POST['input4'];
-		$input5 = $_POST['input5'];
-		$input6 = $_POST['input6'];
-		$input7 = $_POST['input7'];
-		$input8 = $_POST['input8'];
-		$input9 = $_POST['input9'];
-		$input10 = $_POST['input10'];
+		$u = $ob->getData('tbl_product', '', ['prod_name' => ucfirst($_POST['input1'])]);
+		if ($u) {
+			$msg = "Product Already Exist";
+			$classname = "danger";
+		} else {
+			$select = $_POST['select'];
+			$input1 = trim($_POST['input1'], " ");
+			$input2 = $_POST['input2'];
+			$input3 = $_POST['input3'];
+			$input4 = $_POST['input4'];
+			$input5 = $_POST['input5'];
+			$input6 = $_POST['input6'];
+			$input7 = $_POST['input7'];
+			$input8 = $_POST['input8'];
+			$input9 = $_POST['input9'];
+			$input10 = $_POST['input10'];
 
-		$desc = json_encode(array("space" => $input6, "bandwidth" => $input7, "domain" => $input8, "techno" => $input9, "mailbox" => $input10));
+			$desc = json_encode(array("space" => $input6, "bandwidth" => $input7, "domain" => $input8, "techno" => $input9, "mailbox" => $input10));
 
-		$result = $ob->insertData('tbl_product', ['prod_parent_id' => $select, 'prod_name' => $input1, 'html' => $input2]);
+			$result = $ob->insertData('tbl_product', ['prod_parent_id' => $select, 'prod_name' => $input1, 'html' => $input2]);
 
-		if ($result) {
-			$result1 = $ob->insertData('tbl_product_description', ['prod_id' => $result, 'description' => $desc, 'mon_price' => $input3, 'annual_price' => $input4, 'sku' => $input5]);
-			if ($result1) {
-				$msg = "Product Added Successfully";
-				$classname = "success";
+			if ($result) {
+				$result1 = $ob->insertData('tbl_product_description', ['prod_id' => $result, 'description' => $desc, 'mon_price' => $input3, 'annual_price' => $input4, 'sku' => $input5]);
+				if ($result1) {
+					$msg = "Product Added Successfully";
+					$classname = "success";
+				} else {
+					$ob->deleteData('tbl_product', ['id' => $result]);
+					$msg = "Something went wrong";
+					$classname = "danger";
+				}
 			} else {
-				$ob->deleteData('tbl_product', ['id' => $result]);
 				$msg = "Something went wrong";
 				$classname = "danger";
 			}
-		} else {
-			$msg = "Something went wrong";
-			$classname = "danger";
 		}
 	}
 
@@ -182,36 +187,36 @@ if (isset($_POST['addProduct'])) {
 								<div class="form-group col-md-6">
 									<label for="input6">Web Space(in GB) <span class="form-required">*</span></label>
 									<input type="text" class="form-control" value="<?php echo $input6; ?>" id="input6" name="input6" placeholder="Ex: 0.5 for 512 MB" maxlength="5">
-								<span id="eb7"></span>
+									<span id="eb7"></span>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="input7">Bandwidth(in GB) <span class="form-required">*</span></label>
+									<input type="text" class="form-control" value="<?php echo $input7; ?>" id="input7" name="input7" placeholder="Ex: .5 for 512" maxlength="5">
+									<span id="eb8"></span>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="input8">Free Domain <span class="form-required">*</span></label>
+									<input type="text" class="form-control" value="<?php echo $input8; ?>" id="input8" name="input8" placeholder="Enter 0 if no domain available in this services">
+									<span id="eb9"></span>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="input9">Language / Technology Support <span class="form-required">*</span></label>
+									<input type="text" class="form-control" value="<?php echo $input9; ?>" id="input9" name="input9" placeholder="Ex: PHP, MySQL, MongoDB">
+									<span id="eb10"></span>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="input10">Mailbox <span class="form-required">*</span></label>
+									<input type="text" class="form-control" value="<?php echo $input10; ?>" id="input10" name="input10" placeholder="Enter Number of Mailbox,0 if none">
+									<span id="eb11"></span>
+								</div>
 							</div>
-							<div class="form-group col-md-6">
-								<label for="input7">Bandwidth(in GB) <span class="form-required">*</span></label>
-								<input type="text" class="form-control" value="<?php echo $input7; ?>" id="input7" name="input7" placeholder="Ex: .5 for 512" maxlength="5">
-								<span id="eb8"></span>
-							</div>
-							<div class="form-group col-md-6">
-								<label for="input8">Free Domain <span class="form-required">*</span></label>
-								<input type="text" class="form-control" value="<?php echo $input8; ?>" id="input8" name="input8" placeholder="Enter 0 if no domain available in this services">
-								<span id="eb9"></span>
-							</div>
-							<div class="form-group col-md-6">
-								<label for="input9">Language / Technology Support <span class="form-required">*</span></label>
-								<input type="text" class="form-control" value="<?php echo $input9; ?>" id="input9" name="input9" placeholder="Ex: PHP, MySQL, MongoDB">
-								<span id="eb10"></span>
-							</div>
-							<div class="form-group col-md-6">
-								<label for="input10">Mailbox <span class="form-required">*</span></label>
-								<input type="text" class="form-control" value="<?php echo $input10; ?>" id="input10" name="input10" placeholder="Enter Number of Mailbox,0 if none">
-								<span id="eb11"></span>
-							</div>
-						</div>
 
+						</div>
 					</div>
-				</div>
-				<button type="submit" id="button" name="addProduct" class="btn btn-primary"><?php echo $btnvalue; ?></button>
-			</form>
+					<button type="submit" id="button" name="addProduct" class="btn btn-primary disable"><?php echo $btnvalue; ?></button>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 </main>
 <?php require "footer.php";?>

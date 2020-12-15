@@ -126,7 +126,7 @@ class Query extends Database {
 		$mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
 		$mail->SMTPAuth = true; // Enable SMTP authentication
 		$mail->Username = 'forzupee06@gmail.com'; // SMTP username
-		$mail->Password = 'zupee@06'; // SMTP password
+		$mail->Password = 'zupee@066'; // SMTP password
 		$mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = 587; // TCP port to connect to
 
@@ -158,6 +158,7 @@ class Query extends Database {
 
 		}
 	}
+
 	function selectJoin($table1, $table2, $fields, $conditions) {
 		$sql = 'SELECT ';
 		if ($fields != '') {
@@ -231,7 +232,7 @@ class Query extends Database {
 		$sql .= " $op ";
 		$sql .= $cond[0] . "=" . $cond[1];
 
-		return $this->connect()->query($sql);
+		$result = $this->connect()->query($sql);
 		$data = array();
 		if ($result->num_rows > 0) {
 			while ($row = $result->fetch_assoc()) {

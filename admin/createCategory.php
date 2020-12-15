@@ -23,8 +23,9 @@ if (isset($_GET['action'])) {
 	if ($_GET['action'] == 'delete') {
 
 		$ob->deleteData('tbl_product', ['id' => $_GET['id']]);
-		$msg = "Product Deleted Succesfully";
-	}
+            $msg = "Product Deleted Succesfully";
+            $classname = "success";
+	} 
 
 }
 if (isset($_POST['Add'])) {
@@ -39,8 +40,9 @@ if (isset($_POST['Add'])) {
 		$classname = "danger";
 	} else {
 		$ob->insertData('tbl_product', ['prod_parent_id' => $parent_id, 'prod_name' => $prod_name, 'html' => $html, 'prod_available' => $available]);
-		$msg = "Added Succesfully";
-		$select1 = '';
+            $msg = "Added Succesfully";
+            $classname = "success";
+            $select1 = '';
 		$prod_name = '';
 		$html = '';
 		$select2 = '';
@@ -71,16 +73,16 @@ if (isset($_POST['Update'])) {
 
 <?php require "header.php";?>
 <main class="content">
-  <?php if ($msg != ""): ?>
-       <div class="alert alert-<?php echo $classname; ?> alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="text-center alert-message">
-                  <?php echo $msg; ?>
+      <?php if ($msg != ""): ?>
+            <div class="alert alert-<?php echo $classname; ?> alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                  </button>
+                  <div class="text-center alert-message">
+                        <?php echo $msg; ?>
+                  </div>
             </div>
-      </div>
-<?php endif;?>
+      <?php endif;?>
 <div class="container-fluid p-0">
 
       <h1 class="h3 mb-3">Create Category</h1>
@@ -119,7 +121,7 @@ if (isset($_POST['Update'])) {
                               <!--  <h5 class="card-title">Categories Table</h5> -->
                               <!-- <h6 class="card-subtitle text-muted">Use contextual classes to color table rows or individual cells.</h6> -->
                         </div>
-                        <table class="table table-bordered">
+                        <table class="table table-responsive">
                               <thead>
                                     <tr>
                                           <th style="width:5%;">Id</th>
@@ -147,7 +149,7 @@ if (isset($_POST['Update'])) {
                                           </tr>
                                     <?php endforeach;?>
                                     <?php else:echo "<h3 class='text-center'>No Record Found !!!</h3>";?>
-																																						                                    <?php endif;?>
+																																									                                    <?php endif;?>
                               </tbody>
                         </table>
                   </div>

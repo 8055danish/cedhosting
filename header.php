@@ -16,13 +16,16 @@ if (isset($_POST['login'])) {
 	if ($user[0]['is_admin'] == '1') {
 		$_SESSION['alogin'] = 'true';
 		header("location:admin/index.php");
-	} else if ($user[0]['email_approved'] == '1') {
+	} else if ($user[0]['email_approved'] == '1' || $user[0]['phone_approved'] == '1') {
 		$_SESSION['ulogin'] = 'true';
 		$_SESSION['name'] = $user[0]['name'];
 		header("location:index.php");
 	} else if ($user[0]['email_approved'] == '0') {
+		$msg = "Please Verify Your Account";
 		$_SESSION['user_id'] = $user[0]['id'];
-		$msg = $ob->emailverification($email, $user[0]['name'], $user[0]['id']);
+		$_SESSION['mobile'] = $user[0]['mobile'];
+		header("location:verification.php?&msg=Please Verify Your Account");
+
 	} else {
 		$msg = "Incorrect Email/Password";
 	}
@@ -110,7 +113,7 @@ if (isset($_POST['register'])) {
 							<i class="icon-bar"></i>
 						</button>
 						<div class="navbar-brand">
-							<h1><a href="index.php"><span class="navbar-brand-left">Ced</span>&nbsp;<span class="navbar-brand-right"><span>Hosting</span></a></h1>
+							<h2><a href="index.php"><span class="navbar-brand-left"><strong>Ced</strong><img style="height:50px;" src="images/globe.png"></span></h1><h2><span class="navbar-brand-right"><strong>Hosting</strong></span></a>
 						</div>
 					</div>
 
@@ -120,20 +123,20 @@ if (isset($_POST['register'])) {
 							<li class="<?php echo ($current_file_name == "index.php") ? "active" : " " ?>"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
 							<li class="<?php echo ($current_file_name == "about.php") ? "active" : " " ?>"><a href="about.php">About</a></li>
 							<li class="<?php echo ($current_file_name == "services.php") ? "active" : " " ?>"><a href="services.php">Services</a></li>
-							<li class="<?php echo ($current_file_name == "linuxhosting.php" || $current_file_name == "wordpresshosting.php" || $current_file_name == "windowshosting.php" || $current_file_name == "cmshosting.php") ? "active" : " " ?> dropdown">
+							<li class="<?php echo ($current_file_name == "catpage.php") ? "active" : " " ?> dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 								<ul class="dropdown-menu">
-									<?php $products = $ob->getData('tbl_product', ['prod_name', 'html'], ['prod_parent_id' => 1]);?>
+									<?php $products = $ob->getData('tbl_product', ['id', 'prod_name', 'html'], ['prod_parent_id' => 1]);?>
 									<?php foreach ($products as $key => $value): ?>
 										<?php $html = $value['html'];?>
-										<li class="<?php echo ($current_file_name == $html) ? "active" : " " ?>"><a href="<?php echo $html; ?>"><?php echo $value['prod_name']; ?></a></li>
+										<li class=""><a href="catpage.php?id=<?php echo $value['id']; ?>"><?php echo $value['prod_name']; ?></a></li>
 									<?php endforeach;?>
 								</ul>
 							</li>
 							<li class="<?php echo ($current_file_name == "pricing.php") ? "active" : " " ?>"><a href="pricing.php">Pricing</a></li>
 							<li class="<?php echo ($current_file_name == "blog.php") ? "active" : " " ?>"><a href="blog.php">Blog</a></li>
 							<li class="<?php echo ($current_file_name == "contact.php") ? "active" : " " ?>"><a href="contact.php">Contact</a></li>
-							<li class="<?php echo ($current_file_name == "codes.php") ? "active" : " " ?>"><a href="codes.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+							<li class="<?php echo ($current_file_name == "cart.php") ? "active" : " " ?>"><a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo (!isset($_SESSION['cart'])) ? "0" : count($_SESSION['cart']); ?></span></a></li>
 							<?php if (!isset($_SESSION['ulogin'])): ?><li class="<?php echo ($current_file_name == "login.php") ? "active" : " " ?>"><a href="login.php">Login/Register</a></li><?php endif;?>
 							<?php if (isset($_SESSION['ulogin'])): ?><li><a href="logout.php">Logout</a></li><?php endif;?>
 						</ul>
