@@ -125,10 +125,9 @@ if (isset($_POST['Update'])) {
                               <thead>
                                     <tr>
                                           <th style="width:5%;">Id</th>
-                                          <th style="width:20%">Product Name</th>
-                                          <th style="width:30%">html</th>
-                                          <th style="width:25%">Product Available</th>
-                                          <th class="d-none d-md-table-cell" style="width:20%">Date of Birth</th>
+                                          <th style="width:30%">Product Name</th>
+                                          <th style="width:35%">Product Available</th>
+                                          <th class="d-none d-md-table-cell" style="width:30%">Date of Birth</th>
                                           <th>Actions</th>
                                     </tr>
                               </thead>
@@ -139,7 +138,6 @@ if (isset($_POST['Update'])) {
                                           <tr  class="table-success">
                                                 <td><?php echo ++$c; ?></td>
                                                 <td><?php echo $value['prod_name']; ?></td>
-                                                <td><?php echo $value['html']; ?></td>
                                                 <td><?php echo ($value['prod_available'] == '1') ? "Available" : "Not Avaible" ?></td>
                                                 <td class="d-none d-md-table-cell"><?php echo $value['prod_launch_date']; ?></td>
                                                 <td class="table-action">

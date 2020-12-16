@@ -10,3 +10,16 @@
 #alert-div{
 	display: none;
 }
+.buy{
+	font-size: 1em;
+    text-transform: capitalize;
+    background: #7277D5;
+    width: 100%;
+    padding: 1em 2em;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+.buy:hover{
+    background-color:#e7663f;
+}

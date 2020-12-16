@@ -4,8 +4,8 @@
 if (!isset($_SESSION['cart'])) {
 	$_SESSION['cart'] = [];
 }
-if (isset($_GET['id'])) {
-	$id = $_GET['id'];
+if (isset($_SESSION['cart'])) {
+	
 	// $result = $ob->selectJoin2('tbl_product', 'tbl_product_description', ['tbl_product' => '*', 'tbl_product_description' => '*'], ['tbl_product' => 'id', 'tbl_product_description' => 'prod_id'], 'AND', ['tbl_product_description.prod_id', $_GET['id']]);
 	// $desc = $result[0]['description'];
 	// $desc_dec = json_decode($desc);
@@ -14,31 +14,42 @@ if (isset($_GET['id'])) {
 	// $domain = $desc_dec->domain;
 	// $technology = $desc_dec->techno;
 	// $mailbox = $desc_dec->mailbox;
-	$flag = false;
-	if (count($_SESSION['cart']) == 0) {
-		array_push($_SESSION['cart'], array('id' => $id, 'count' => 1));
-	}
-	foreach ($_SESSION['cart'] as $key => $value) {
-		if ($value['id'] == $id) {
-			$_SESSION['cart'][$key]['count'] += 1;
-			$flag = true;
-		}
-	}
-	if ($flag == false) {
-		array_push($_SESSION['cart'], array('id' => $id, 'count' => 1));
-		$flag = true;
-	}
+
 }
 ?>
 <div class="content">
 	<div class="detailed-section">
 		<div class="container">
 			<h2>Cart</h2>
-			<?php $c = 0;foreach ($_SESSION['cart'] as $key => $value): ?>
-          <h3>(Service <?php echo $c++; ?>)ID:<?php print_r($_SESSION['cart'][$key]['id']);?>
-          Count:<?php print_r($_SESSION['cart'][$key]['count']);?><br></h3>
-			<?php endforeach?>
-		</div>
-	</div>
+			<div class="detailed-grids">
+				<?php foreach($_SESSION['cart'] as $key=>$value):?>
+				<?php $id = $value['id'];
+				$result = $ob->selectJoin2('tbl_product', 'tbl_product_description', ['tbl_product' => '*', 'tbl_product_description' => '*'], ['tbl_product' => 'id', 'tbl_product_description' => 'prod_id'], 'AND', ['tbl_product_description.prod_id', $id]);
+				?>	
+				<div class="col-md-3 detailed-grid">
+					<div class="detailed-top">
+						<h4><?php echo $result[0]['prod_name']; ?></h4>
+					</div>
+					<div class="detailed-bottom">
+						<h5>Rs.<?php echo $result[0]['mon_price']; ?></h5>
+						<ul>
+						<?php $desc = $result[0]['description'];$desc_dec = json_decode($desc); ?>
+						<li><?php echo $desc_dec->space;?> GB Space</li>
+						<li><?php echo $desc_dec->bandwidth;?> GB Bandwidth</li>
+						<li><?php echo $desc_dec->mailbox;?> Mailboxes</li>
+						<li>1 Year Free Hosting</li>
+						<li><?php echo $desc_dec->techno;?></li>
+						</ul>
+						<input class="buy" type="submit" name="bcart" value="Buy now">
+						<form action = "ajax.php" method="post">
+							<input type="hidden" name="cartid" value=<?php echo $key; ?>>
+							<input class="buy" type="submit" name="rCart" value="Remove cart">
+						</form>
+					</div>
+				</div>
+				<?php endforeach; ?>
+			</div>
+	    </div>
+    </div>
 </div>
 <?php require "footer.php";?>

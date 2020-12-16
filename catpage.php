@@ -8,6 +8,7 @@ if (isset($_GET['id'])) {
 }
 
 ?>
+
 <!---singleblog--->
 <div class="content">
 	<?php echo $result[0]['html']; ?>
@@ -16,7 +17,7 @@ if (isset($_GET['id'])) {
 			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 				<ul id="myTab" class="nav nav-tabs left-tab" role="tablist">
 					<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">IN Hosting</a></li>
-					<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">US Hosting</a></li>
+					<li role.buy-button:hover{background: #E7663F;}="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">US Hosting</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
@@ -39,7 +40,11 @@ if (isset($_GET['id'])) {
 												<li><strong>location</strong> : <img src="images/india.png"></li>
 											</ul>
 										</div>
-										<a href="cart.php?id=<?php echo $value['prod_id']; ?>">Add Cart</a>
+										<form action="ajax.php" method="POST" class="buy-button">
+										<input type="hidden" value="<?php echo $value['prod_id']; ?>" name="id">
+										<input type="hidden" value="<?php echo $_GET['id'];?>" name="pageid">
+										<input type="submit" class="buy"  value="Add Cart" name="submit">
+										</form>
 									</div>
 								<?php endforeach;?>
 								<?php else:echo "No Record Found!!!";?>																																																									<?php endif;?>

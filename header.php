@@ -59,6 +59,7 @@ if (isset($_POST['register'])) {
 <html>
 <head>
 	<title>Ced Hosting a Hosting Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+	<link rel="stylesheet" href="css/mycss.css" type="text/css" media="screen">
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,7 +82,7 @@ if (isset($_POST['register'])) {
 	<script src="js/myjsfunction.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/mycss.css" type="text/css" media="screen">
+	
 	<!--lightboxfiles-->
 	<!-- <script type="text/javascript">
 		$(function() {

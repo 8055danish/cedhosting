@@ -10,7 +10,7 @@
 			<div class="col-md-6 banner-grid">
 				<h3>Unlimited Web Hosting</h3>
 				<p>this hero area to show off some of your nice work. You can even have a video inside it since it’s great as a secondary call to action alongside this button underneath this text.</p>
-				<a href="codes.php" class="button">get started</a>
+				<a href="pricing.php" class="button">get started</a>
 			</div>
 			<div class="clearfix"></div>
 		</div>

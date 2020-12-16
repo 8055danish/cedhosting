@@ -1,6 +1,9 @@
 <?php session_start();?>
 <?php if (!isset($_SESSION['alogin'])) {
 	header("location:../");
+	if(isset($_POST['ulogin'])){
+		header("location:../");
+	}
 }
 ?>
 <?php $current_file_name = basename($_SERVER['PHP_SELF']);?>
@@ -14,7 +17,7 @@
 	<meta name="description" content="Responsive Web UI Kit &amp; Dashboard Template based on Bootstrap">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, web ui kit, dashboard template, admin template">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
 	<title>Admin Panel : Dashboard</title>
@@ -44,9 +47,9 @@
 
 					<li class="sidebar-item <?php echo ($current_file_name == "createCategory.php" || $current_file_name == "addProduct.php" || $current_file_name == "viewProduct.php") ? "active" : " " ?>">
 						<a href="#ui1" data-toggle="collapse" class="sidebar-link collapsed">
-							<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Products</span>
+							<i class="align-middle" data-feather="archive"></i> <span class="align-middle">Products</span>
 						</a>
-						<ul id="ui1" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+						<ul id="ui1" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
 							<li class="sidebar-item <?php echo ($current_file_name == "createCategory.php") ? "active" : " " ?>"><a class="sidebar-link" href="createCategory.php">Create Category</a></li>
 							<li class="sidebar-item <?php echo ($current_file_name == "addProduct.php") ? "active" : " " ?>"><a class="sidebar-link" href="addProduct.php">Add Product</a></li>
 							<li class="sidebar-item <?php echo ($current_file_name == "viewProduct.php") ? "active" : " " ?>"><a class="sidebar-link" href="viewProduct.php">View Products</a></li>
@@ -55,7 +58,7 @@
 					</li>
 					<li class="sidebar-item">
 						<a href="#ui2" data-toggle="collapse" class="sidebar-link collapsed">
-							<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Orders</span>
+							<i class="align-middle" data-feather="grid"></i> <span class="align-middle">Orders</span>
 						</a>
 						<ul id="ui2" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
 							<li class="sidebar-item"><a class="sidebar-link" href="ui-alerts.php">Pending Orders</a></li>
@@ -300,7 +303,7 @@
 							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-								<img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded mr-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+								<!-- <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded mr-1" alt="Charles Hall" />--> <span class="text-dark">Admin</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="pages-profile.php"><i class="align-middle mr-1" data-feather="user"></i> Profile</a>
