@@ -70,7 +70,7 @@
 				<div class="col-md-4 brilliant-grid">
 					<div class="brilliant-left">
 						<i class="glyphicon glyphicon-link" aria-hidden="true"></i>
-					</div>
+					</div>s
 					<div class="brilliant-right">
 						<h4>Link Building</h4>
 						<p>We strive to deliver the very best possible work that’s available out there, at any time. That’s how we set ourselves apart.</p>

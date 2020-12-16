@@ -20,7 +20,7 @@ $(document).ready(function(){
 	// 	});
 	// });
 
-	$('select').blur(function(){
+	$('#select2').blur(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb1').html("*Required");
@@ -44,7 +44,7 @@ $(document).ready(function(){
 			$(this).css("border", "3px solid red");check12();
 		}
 		if(val){
-			var pat = /^[^\s]([A-Za-z]{1,}|[\s]{1}[A-Za-z]{1,})*$/i.test($("#input1").val());
+			var pat = /^[a-zA-Z]*[-\s]?[a-zA-Z]+[-\s]?[0-9]*(([a-zA-Z0-9]*[-\s]?[a-zA-Z]+[-\s]?[0-9]*)+)*$/i.test($("#input1").val());
 			if(!pat){
 				$('#eb2').html("Wrong Product Name");
 				$(this).focus();

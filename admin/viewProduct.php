@@ -44,12 +44,12 @@ $product = $ob->selectJoin('tbl_product', 'tbl_product_description', ['tbl_produ
 	<?php endif;?>
 	<div class="container-fluid p-0">
 		<div class="col-12 col-xl-12">
-			<div class="card">
+			<div class="card p-3">
 				<div class="card-header">
 					<h5 class="card-title">Products List</h5>
 					<!-- <h6 class="card-subtitle text-muted">Use <code>.table-striped</code> to add zebra-striping to any table row within the <code>&lt;tbody&gt;</code>.</h6> -->
 				</div>
-				<table class="table table-responsive">
+				<table id="table_id" class="table table-responsive">
 					<thead>
 						<tr>
 							<th style="width:10%;">Prod Parent Name</th>
@@ -85,16 +85,23 @@ $desc_dec = json_decode($desc);?>
 								<td style="width:10%"><?php echo $desc_dec->mailbox; ?></td>
 								<td style="width:5%"><?php echo ($value['prod_available'] == 1) ? "Availabile" : "Not Availabile" ?></td>
 								<td class="d-none d-md-table-cell" style="width:10%"><?php echo $value['prod_launch_date']; ?></th>
-									<td class="table-action" style="width:10%">
-										<a href="addProduct.php?action=edit&id=<?php echo $value['prod_id'] ?>"><i class="align-middle" data-feather="edit-2"></i></a>
-										<a href="viewProduct.php?action=delete&id=<?php echo $value['prod_id'] ?>"><i class="align-middle" data-feather="trash"></i></a>
-									</td>
-								</tr>
-							<?php endforeach;?>
-						</tbody>
-					</table>
-				</div>
+								<td class="table-action" style="width:10%">
+									<a href="addProduct.php?action=edit&id=<?php echo $value['prod_id'] ?>"><i class="align-middle" data-feather="edit-2"></i></a>
+									<a href="viewProduct.php?action=delete&id=<?php echo $value['prod_id'] ?>"><i class="align-middle" data-feather="trash"></i></a>
+								</td>
+							</tr>
+						<?php endforeach;?>
+					</tbody>
+				</table>
 			</div>
 		</div>
-	</main>
-	<?php require "footer.php";?>
+	</div>
+</main>
+<?php require "footer.php";?>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+<script>
+	$(document).ready( function () {
+		$('#table_id').DataTable();
+	} );
+</script>

@@ -115,13 +115,13 @@ if (isset($_POST['submito'])) {
 							<div>
 								<?php if ($result[0]['phone_approved'] == '0'): ?>
 
-								<input type="submit" name="submitp" value="Send OTP">
-								<br><br>
+									<input type="submit" name="submitp" value="Send OTP">
+									<br><br>
 								</form action="verification.php" method="post">
 								<input type="text" name="otp" placeholder="Please Enter Otp"><br><br><input type=submit name="submito">
 							</form>
 							<?php else:echo "<input type='submit' style='background-color:green'; value='Verified'>";?>
-																															<?php endif;?>
+								<?php endif;?>
 						</div>
 
 

@@ -26,7 +26,8 @@ if (isset($_GET['id'])) {
 								<?php foreach ($result2 as $key => $value): ?>
 									<div class="col-md-3 linux-price">
 										<div class="linux-top">
-											<?php $desc = $value['description'];$desc_dec = json_decode($desc);?>
+											<?php $desc = $value['description'];
+$desc_dec = json_decode($desc);?>
 											<h4><?php echo $value['prod_name']; ?></h4>
 										</div>
 										<div class="linux-bottom">
@@ -41,13 +42,14 @@ if (isset($_GET['id'])) {
 											</ul>
 										</div>
 										<form action="ajax.php" method="POST" class="buy-button">
-										<input type="hidden" value="<?php echo $value['prod_id']; ?>" name="id">
-										<input type="hidden" value="<?php echo $_GET['id'];?>" name="pageid">
-										<input type="submit" class="buy"  value="Add Cart" name="submit">
+											<input type="hidden" value="<?php echo $value['prod_id']; ?>" name="id">
+											<input type="hidden" value="<?php echo $_GET['id']; ?>" name="pageid">
+											<input type="submit" class="buy"  value="Add Cart" name="submit">
 										</form>
 									</div>
 								<?php endforeach;?>
-								<?php else:echo "No Record Found!!!";?>																																																									<?php endif;?>
+								<?php else:echo "No Record Found!!!";?>
+									<?php endif;?>
 								<div class="clearfix"></div>
 							</div>
 						</div>

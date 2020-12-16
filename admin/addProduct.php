@@ -128,7 +128,7 @@ if (isset($_POST['addProduct'])) {
 							<div class="form-row">
 								<div class="form-group col-md-4">
 									<label for="select">Select Product Category <span class="form-required">*</span></label>
-									<select id="select" name="select" class="form-control">
+									<select id="select2" name="select" class="form-control">
 										<option value='' selected>Choose...</option>
 										<?php $r = $ob->getData('tbl_product', ['id', 'prod_name'], ['prod_parent_id' => 1]);?>
 										<?php foreach ($r as $key => $value): ?>

@@ -19,9 +19,7 @@
 	<meta name="keywords" content="adminkit, bootstrap, web ui kit, dashboard template, admin template">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
-	<title>Admin Panel : Dashboard</title>
-
+	<title>Admin Panel</title>
 	<link href="css/app.css" rel="stylesheet">
 	<link href="css/mycss.css" rel="stylesheet">
 </head>

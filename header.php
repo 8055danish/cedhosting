@@ -19,6 +19,7 @@ if (isset($_POST['login'])) {
 	} else if ($user[0]['email_approved'] == '1' || $user[0]['phone_approved'] == '1') {
 		$_SESSION['ulogin'] = 'true';
 		$_SESSION['name'] = $user[0]['name'];
+		$_SESSION['user_id'] = $user[0]['id'];
 		header("location:index.php");
 	} else if ($user[0]['email_approved'] == '0') {
 		$msg = "Please Verify Your Account";
@@ -59,7 +60,6 @@ if (isset($_POST['register'])) {
 <html>
 <head>
 	<title>Ced Hosting a Hosting Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
-	<link rel="stylesheet" href="css/mycss.css" type="text/css" media="screen">
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,7 +82,8 @@ if (isset($_POST['register'])) {
 	<script src="js/myjsfunction.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen">
-	
+	<link rel="stylesheet" href="css/mycss.css" type="text/css" media="screen">
+
 	<!--lightboxfiles-->
 	<!-- <script type="text/javascript">
 		$(function() {
@@ -114,7 +115,7 @@ if (isset($_POST['register'])) {
 							<i class="icon-bar"></i>
 						</button>
 						<div class="navbar-brand">
-							<h2><a href="index.php"><span class="navbar-brand-left"><strong>Ced</strong><img style="height:50px;" src="images/globe.png"></span></h1><h2><span class="navbar-brand-right"><strong>Hosting</strong></span></a>
+							<h2><a style="text-decoration:none" href="index.php"><span class="navbar-brand-left"><strong>Ced</strong><img style="height:50px;" src="images/globe.png"></span></h1><h2><span class="navbar-brand-right"><strong>Hosting</strong></span></a>
 						</div>
 					</div>
 
@@ -139,7 +140,7 @@ if (isset($_POST['register'])) {
 							<li class="<?php echo ($current_file_name == "contact.php") ? "active" : " " ?>"><a href="contact.php">Contact</a></li>
 							<li class="<?php echo ($current_file_name == "cart.php") ? "active" : " " ?>"><a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo (!isset($_SESSION['cart'])) ? "0" : count($_SESSION['cart']); ?></span></a></li>
 							<?php if (!isset($_SESSION['ulogin'])): ?><li class="<?php echo ($current_file_name == "login.php") ? "active" : " " ?>"><a href="login.php">Login/Register</a></li><?php endif;?>
-							<?php if (isset($_SESSION['ulogin'])): ?><li><a href="logout.php">Logout</a></li><?php endif;?>
+							<?php if (isset($_SESSION['ulogin'])): ?><li><a href="verification.php">Verification</a></li><li><a href="logout.php">Logout</a></li><?php endif;?>
 						</ul>
 
 					</div><!-- /.navbar-collapse -->
