@@ -1,3 +1,8 @@
+<?php
+if (!isset($_GET['id']) || $_GET['id']=='') {
+	header("location:index.php");
+}
+?>
 <?php require "header.php";?>
 <?php
 $ob = new Query;
@@ -6,9 +11,7 @@ if (isset($_GET['id'])) {
 
 	$result2 = $ob->selectJoin2('tbl_product', 'tbl_product_description', ['tbl_product' => '*', 'tbl_product_description' => '*'], ['tbl_product' => 'id', 'tbl_product_description' => 'prod_id'], 'AND', ['tbl_product.prod_parent_id', $_GET['id']]);
 }
-
 ?>
-
 <!---singleblog--->
 <div class="content">
 	<?php echo $result[0]['html']; ?>
@@ -27,8 +30,9 @@ if (isset($_GET['id'])) {
 									<div class="col-md-3 linux-price">
 										<div class="linux-top">
 											<?php $desc = $value['description'];
-$desc_dec = json_decode($desc);?>
-											<h4><?php echo $value['prod_name']; ?></h4>
+											$desc_dec = json_decode($desc);
+											?>
+											<h4><?php echo $result[0]['prod_name'] . " " . $value['prod_name']; ?></h4>
 										</div>
 										<div class="linux-bottom">
 											<h5>Rs.<?php echo $value['mon_price']; ?> <span class="month">per month</span></h5>
@@ -48,8 +52,8 @@ $desc_dec = json_decode($desc);?>
 										</form>
 									</div>
 								<?php endforeach;?>
-								<?php else:echo "No Record Found!!!";?>
-									<?php endif;?>
+								<?php else:echo "Sorry,No Record Found!!!";?>
+										<?php endif;?>
 								<div class="clearfix"></div>
 							</div>
 						</div>

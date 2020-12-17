@@ -61,13 +61,13 @@ if (isset($_POST['addProduct'])) {
 		}
 	}
 	if ($btnvalue == 'Add Product') {
-		$u = $ob->getData('tbl_product', '', ['prod_name' => ucfirst($_POST['input1'])]);
+		$select = $_POST['select'];
+		$input1 = trim($_POST['input1'], " ");
+		$u = $ob->getData('tbl_product', '', ['prod_parent_id' => $select, 'op' => 'AND', 'prod_name' => ucfirst($input1)]);
 		if ($u) {
 			$msg = "Product Already Exist";
 			$classname = "danger";
 		} else {
-			$select = $_POST['select'];
-			$input1 = trim($_POST['input1'], " ");
 			$input2 = $_POST['input2'];
 			$input3 = $_POST['input3'];
 			$input4 = $_POST['input4'];
@@ -97,6 +97,7 @@ if (isset($_POST['addProduct'])) {
 				$classname = "danger";
 			}
 		}
+
 	}
 
 }

@@ -7,7 +7,7 @@ $id = "";
 $html = "";
 $select1 = '';
 $prod_name = '';
-//$html = '';
+$html = '';
 $select2 = '';
 $btnvalue = "Add";
 if (isset($_GET['action'])) {
@@ -149,7 +149,7 @@ if (isset($_POST['Update'])) {
                                                 </tr>
                                           <?php endforeach;?>
                                           <?php else:echo "<h3 class='text-center'>No Record Found !!!</h3>";?>
-                                          <?php endif;?>
+	                                          <?php endif;?>
                                     </tbody>
                               </table>
                         </div>
