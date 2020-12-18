@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
 									</div>
 								<?php endforeach;?>
 								<?php else:echo "Sorry,No Record Found!!!";?>
-										<?php endif;?>
+								<?php endif;?>
 								<div class="clearfix"></div>
 							</div>
 						</div>

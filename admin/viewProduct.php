@@ -10,7 +10,8 @@ if (isset($_GET['msg'])) {
 
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
-	if ($action == 'delete') {
+	?><script>r= confirm("Are you want to delete this");if(r==true){<?php
+		if ($action == 'delete') {
 		$id = $_GET['id'];
 		$result = $ob->deleteData('tbl_product', ['id' => $id]);
 		if ($result) {
@@ -26,7 +27,9 @@ if (isset($_GET['action'])) {
 			$msg = "something went wrong";
 			$classname = "danger";
 		}
-	}
+	}		
+	?>}</script><?php
+
 }
 $product = $ob->selectJoin('tbl_product', 'tbl_product_description', ['tbl_product' => '*', 'tbl_product_description' => '*'], ['tbl_product' => 'id', 'tbl_product_description' => 'prod_id']);
 ?>

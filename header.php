@@ -1,6 +1,6 @@
 <?php session_start();?>
 <?php if (isset($_SESSION['alogin'])) {
-	header("location:logout.php");
+	unset($_SESSION['alogin']);
 }
 ?>
 <?php
@@ -13,13 +13,22 @@ if (isset($_POST['login'])) {
 	$email = trim($_POST['email'], " ");
 	$password = $_POST['password'];
 	$user = $ob->getData('tbl_user', '', ['email' => $email, 'op' => 'AND', 'password' => md5($password)]);
-	if ($user[0]['is_admin'] == '1') {
-		$_SESSION['alogin'] = 'true';
+	if ($user[0]['is_admin'] == '1' and $user[0]['active']=='1') {
+		$_SESSION['alogin'] = 'true';	
 		header("location:admin/index.php");
-	} else if ($user[0]['email_approved'] == '1' || $user[0]['phone_approved'] == '1') {
+	} 
+	else if($user[0]['active']=='0'){
+		$msg = "User not Active Currently";
+		$danger = "danger";
+	}
+	else if ($user[0]['email_approved'] == '1' || $user[0]['phone_approved'] == '1' && $user[0]['active']=='1') {
 		$_SESSION['ulogin'] = 'true';
 		$_SESSION['name'] = $user[0]['name'];
 		$_SESSION['user_id'] = $user[0]['id'];
+		if (isset($_POST['check'])) {
+			setcookie("email",$user[0]['email'],time()+3600,"/");
+			setcookie("password",$user[0]['password'],time()+3600,"/");
+		}
 		header("location:index.php");
 	} else if ($user[0]['email_approved'] == '0') {
 		$msg = "Please Verify Your Account";
@@ -39,12 +48,16 @@ if (isset($_POST['register'])) {
 	$cpassword = $_POST['cpassword'];
 	$select = $_POST['select'];
 	$sinput = trim($_POST['sinput'], " ");
-	$user = $ob->getData('tbl_user', '', ['email' => $email]);
+	$user = $ob->getData('tbl_user', '', ['email' => $email,'op'=>'OR','mobile'=>$mobile]);
 
 	if ($user != 0) {
 		// if user exists
 		if (strcasecmp($user[0]['email'], $email) == "0") {
 			$msg = "Email already exists";
+			$classname = "danger";
+		}
+		if($user[0]['mobile']==$mobile){
+			$msg = "Mobile Number already exists";
 			$classname = "danger";
 		}
 
@@ -128,7 +141,7 @@ if (isset($_POST['register'])) {
 							<li class="<?php echo ($current_file_name == "catpage.php") ? "active" : " " ?> dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 								<ul class="dropdown-menu">
-									<?php $products = $ob->getData('tbl_product', ['id', 'prod_name', 'html'], ['prod_parent_id' => 1]);?>
+									<?php $products = $ob->getData('tbl_product', ['id', 'prod_name', 'html'], ['prod_parent_id' => 1,'op'=>'AND','prod_available'=>1]);?>
 									<?php foreach ($products as $key => $value): ?>
 										<?php $html = $value['html'];?>
 										<li class=""><a href="catpage.php?id=<?php echo $value['id']; ?>"><?php echo $value['prod_name']; ?></a></li>

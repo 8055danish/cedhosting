@@ -1,9 +1,9 @@
 <?php session_start();?>
 <?php if (!isset($_SESSION['alogin'])) {
-	header("location:../");
-	if(isset($_POST['ulogin'])){
-		header("location:../");
-	}
+	header("location:../");	
+}
+if(isset($_SESSION['ulogin'])){
+	unset($_SESSION['ulogin']);
 }
 ?>
 <?php $current_file_name = basename($_SERVER['PHP_SELF']);?>

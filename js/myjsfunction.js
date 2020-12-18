@@ -12,6 +12,19 @@ function validateForm1(){
 			return false;
 		}
 	}
+	$("#email").bind("keypress keyup keydown", function (e) {
+
+
+		var email = $('#email').val();
+		var regtwodots = /^(?!.*?\.\.).*?$/;
+		var lemail = email.length;
+		if ((email.charAt(0) == ".") || !(regtwodots.test(email))) {
+		alert("invalid email");
+		$('#email').val("");
+		return;
+		}
+		
+		});
 	if ( document.forms["form1"]["name"].value== "") {
 		swal("Name must be filled out");
 		$("#name").css({border:'1px solid red'});
@@ -62,7 +75,7 @@ function validateForm1(){
 		return false;
 	}
 	if (document.forms["form1"]["password"].value !="") {
-		var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$/i.test($("#password").val());
+		var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/i.test($("#password").val());
 		if(!re){
 			swal("Password must contains atleast 1 lower,1 upper letter,1 number and length should be 8 ");
 			$("#password").css({border:'1px solid red'});
@@ -74,6 +87,22 @@ function validateForm1(){
 		$("#sinput").css({border:'1px solid red'});
 		return false;
 	}
+	if($("#sinput").val()){
+		$alex=$('#sinput').val();
+		if(Number.isInteger(parseInt($alex)))
+		{
+			swal("answer can be only in alphanumeric or alphabets");
+			return false;
+		}
+    }
+	// if($("$sinput").val()){
+	// 	var re = //i.test($("#password").val());
+	// 	if(!re){
+	// 		swal("Security Answer not valid ");
+	// 		$("#sinput").css({border:'1px solid red'});
+	// 		return false;
+	// 	}
+	// }
 }
 function validateForm2(){
 	if ( document.forms["form2"]["email"].value== "") {
@@ -95,3 +124,10 @@ function validateForm2(){
 		return false;
 	}
 }
+
+function alexa()
+{
+
+
+}
+

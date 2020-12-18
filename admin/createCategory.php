@@ -21,11 +21,13 @@ if (isset($_GET['action'])) {
 		$select2 = $data[0]['prod_available'];
 		$btnvalue = "Update";
 	}
-	if ($_GET['action'] == 'delete') {
-
-		$ob->deleteData('tbl_product', ['id' => $_GET['id']]);
-		$msg = "Product Deleted Succesfully";
-		$classname = "success";
+	if ($_GET['action'] == 'delete') {?>
+            <script>r=confirm("Are you want to delete this ?");if(r==true){<?php
+                  $ob->deleteData('tbl_product', ['id' => $_GET['id']]);
+		      $msg = "Product Deleted Succesfully";
+		      $classname = "success";?>}
+            </script><?php
+		
 	}
 
 }
@@ -37,11 +39,11 @@ if (isset($_POST['Add'])) {
 	$ob = new Query;
 	$u = $ob->getData('tbl_product', '', ['prod_name' => ucfirst($prod_name)]);
 	if ($u) {
-		$msg = "Product Already Exist";
+		$msg = "Category Already Exist";
 		$classname = "danger";
 	} else {
 		$ob->insertData('tbl_product', ['prod_parent_id' => $parent_id, 'prod_name' => $prod_name, 'html' => $html, 'prod_available' => $available]);
-		$msg = "Added Succesfully";
+		$msg = "Category Added Succesfully";
 		$classname = "success";
 		$select1 = '';
 		$prod_name = '';
@@ -57,12 +59,12 @@ if (isset($_POST['Update'])) {
 	$u = $ob->getData('tbl_product', '', ['prod_name' => ucfirst($prod_name)]);
 
 	$result1 = $ob->updateData('tbl_product', ['prod_name' => $prod_name, 'html' => $html, 'prod_available' => $available], ['id' => $id]);
-	$msg = "Product Updated Succesfully";
+	$msg = "category Updatedphp Succesfully";
 	$classname = "success";
 	$btnvalue = "Add";
 	$select1 = '';
 	$prod_name = '';
-	//$html = '';
+	$html = '';
 	$select2 = '';
 
 }
@@ -96,7 +98,7 @@ if (isset($_POST['Update'])) {
                                                 <option value="1" <?php echo ($select1 != '') ? 'selected' : '' ?>>Hosting</option>
                                           </select>
                                           <span id="eb1"></span>
-                                          <input type="text" name="prod_name" id="prod_name" placeholder="Enter Product Name" value="<?php echo $prod_name; ?>" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
+                                          <input type="text" name="prod_name" id="prod_name" placeholder="Enter Category Name" value="<?php echo $prod_name; ?>" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
                                           <select name="select2" id="select2" class="custom-select mb-2">
                                                 <option  value="">--Is Available--</option>
                                                 <option value="1" <?php echo ($select2 == '1') ? 'selected' : '' ?>>Yes</option>
@@ -112,7 +114,7 @@ if (isset($_POST['Update'])) {
                                                      <button type="submit" name="<?php echo $btnvalue; ?>" class="btn btn-primary mb-2 ml-2"><?php echo $btnvalue; ?></button>
                                                </div>
                                           </div>
-                                    </form>
+                                          php            phabetic/ Alpha+numeric/ Alpha+numeric with special chara                      </form>
                               </div>
                         </div>
                   </div>
@@ -140,7 +142,7 @@ if (isset($_POST['Update'])) {
                                                 <tr  class="table-success">
                                                       <td><?php echo ++$c; ?></td>
                                                       <td><?php echo $value['prod_name']; ?></td>
-                                                      <td><?php echo ($value['prod_available'] == '1') ? "Available" : "Not Avaible" ?></td>
+                                                      <td><span style="background-color:lightgreen;border-radius:15px;"><?php echo ($value['prod_available'] == '1') ? "Available" : "Not Avaible" ?></span></td>
                                                       <td class="d-none d-md-table-cell"><?php echo $value['prod_launch_date']; ?></td>
                                                       <td class="table-action">
                                                             <a href="createCategory.php?action=edit&id=<?php echo $value['id']; ?>"><i class="align-middle" data-feather="edit-2"></i></a>
@@ -160,7 +162,7 @@ if (isset($_POST['Update'])) {
 <?php require "footer.php";?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/khcg473vbmxxnf552ukj7zs3ec2p607m4l2k328yt9x31onw/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
       $(document).ready( function () {
             $('#table_id').DataTable();
@@ -169,7 +171,7 @@ if (isset($_POST['Update'])) {
 <script>
     tinymce.init({
         selector: 'textarea#editor',
-        menubar: false
+        menubar: true
   });
 </script>
 </body>

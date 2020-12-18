@@ -24,7 +24,7 @@
 						</div>
 						<div>
 							<span>Full Name<label>*</label></span>
-							<input type="text" placeholder="Enter Name" id="name" name="name" onkeypress="return /[a-zA-Z\s]/i.test(event.key)">
+							<input type="text" placeholder="Enter Name" id="name" name="name"  onkeypress="return /[a-zA-Z\s]/i.test(event.key)">
 						</div>
 						<div>
 							<span>Mobile<label>*</label></span>
@@ -55,7 +55,7 @@
 						</div>
 						<div>
 							<span>Answer<label>*</label></span>
-							<input id="sinput" placeholder="Enter Security Answer" name="sinput" type="text">
+							<input id="sinput" placeholder="Enter Security Answer" name="sinput" pattern="^[ A-Za-z0-9_@./#$&+-]*$" type="text">
 						</div>
 					</div>
 					<div class="clearfix"> </div>

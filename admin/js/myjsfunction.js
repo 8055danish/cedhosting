@@ -24,9 +24,9 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb1').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");
 			$(this).addClass('has-Error');check12();
+			return false;
 		}
 		else {
 			$(this).css("border", "3px solid green");
@@ -40,15 +40,15 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb2').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;	
 		}
 		if(val){
 			var pat = /^[a-zA-Z]*[-\s]?[a-zA-Z]+[-\s]?[0-9]*(([a-zA-Z0-9]*[-\s]?[a-zA-Z]+[-\s]?[0-9]*)+)*$/i.test($("#input1").val());
 			if(!pat){
 				$('#eb2').html("Wrong Product Name");
-				$(this).focus();
 				$(this).css("border", "3px solid red");check12();
+				return false;
 			}
 			else {
 				$(this).css("border", "3px solid green");
@@ -61,15 +61,15 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb4').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;
 		}
 		if(val){
 			var pat = /^([0-9]+(\.[0-9]+)?)$/i.test($("#input3").val());
 			if(!pat){
 				$('#eb4').html("Wrong Monthly Price Format");
-				$(this).focus();
 				$(this).css("border", "3px solid red");check12();
+				return false;
 			}
 			else {
 				$(this).css("border", "3px solid green");
@@ -83,16 +83,22 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb5').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;
 		}
 		if(val){
 			var pat = /^([0-9]+(\.[0-9]+)?)$/i.test($("#input4").val());
-			if(!pat){
-				$('#eb5').html("Wrong Annual Price Format");
-				$(this).focus();
-				$(this).css("border", "3px solid red");check12();
+			if($("#input3").val()>=$("#input4").val()) {
+					$("#eb5").html("Annual Price must be greater than monthly price");
+					$(this).css("border", "3px solid red");check12();
+					return false;
 			}
+			else if(!pat){
+				$('#eb5').html("Wrong Annual Price Format");
+				$(this).css("border", "3px solid red");check12();
+				return false;
+			}
+		
 			else {
 				$(this).css("border", "3px solid green");
 				$('#eb5').html("");
@@ -101,19 +107,20 @@ $(document).ready(function(){
 			}
 		}
 	});
+
 	$('#input6').blur(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb7').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;
 		}
 		if(val){
-			var pat = /^([0-9]+(\.[0-9]+)?)$/i.test($("#input6").val());
+			var pat = /^[a-zA-Z0-9.\s]+$/.test($("#input6").val());
 			if(!pat){
 				$('#eb7').html("Wrong SKU Format");
-				$(this).focus();
 				$(this).css("border", "3px solid red");check12();
+				return false;
 			}
 			else {
 				$(this).css("border", "3px solid green");
@@ -127,15 +134,15 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb8').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;
 		}
 		if(val){
 			var pat = /^([0-9]+(\.[0-9]+)?)$/i.test($("#input7").val());
 			if(!pat){
 				$('#eb8').html("Wrong Web Space Format");
-				$(this).focus();
 				$(this).css("border", "3px solid red");check12();
+				return false;
 			}
 			else {
 				$(this).css("border", "3px solid green");
@@ -148,15 +155,15 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb6').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;
 		}
 		if(val){
 			var pat = /^[a-zA-Z0-9#](?:[a-zA-Z0-9_-]*[a-zA-Z0-9])?$/i.test($("#input5").val());
 			if(!pat){
 				$('#eb6').html("Wrong Bandwidth Format");
-				$(this).focus();
 				$(this).css("border", "3px solid red");check12();
+				return false;
 			}
 			else {
 				$(this).css("border", "3px solid green");
@@ -169,15 +176,15 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb9').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;
 		}
 		if(val){
 			var pat = /^((^[0-9]*$)|(^[A-Za-z]+$))/i.test($("#input8").val());
 			if(!pat){
 				$('#eb9').html("Wrong Domain Format");
-				$(this).focus();
 				$(this).css("border", "3px solid red");check12();
+				return false;
 			}
 			else {
 				$(this).css("border", "3px solid green");
@@ -190,15 +197,15 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb10').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;
 		}
 		if(val){
 			var pat = /^[a-zA-Z0-9]*[a-zA-Z]+[0-9]*(,?([a-zA-Z0-9]*[a-zA-Z]+[0-9]*)+)*$/i.test($("#input9").val());
 			if(!pat){
 				$('#eb10').html("Wrong Format");
-				$(this).focus();
 				$(this).css("border", "3px solid red");check12();
+				return false;
 			}
 			else {
 				$(this).css("border", "3px solid green");
@@ -211,15 +218,15 @@ $(document).ready(function(){
 		var val = $(this).val();
 		if(val==""){
 			$('#eb11').html("*Required");
-			$(this).focus();
 			$(this).css("border", "3px solid red");check12();
+			return false;
 		}
 		if(val){
 			var pat = /^((^[0-9]*$)|(^[A-Za-z]+$))$/i.test($("#input10").val());
 			if(!pat){
 				$('#eb11').html("Wrong Mailbox format");
-				$(this).focus();
 				$(this).css("border", "3px solid red");check12();
+				return false;
 			}
 			else {
 				$(this).css("border", "3px solid green");

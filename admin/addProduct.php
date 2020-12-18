@@ -144,7 +144,7 @@ if (isset($_POST['addProduct'])) {
 									<span id="eb2"></span>
 								</div>
 								<div class="form-group col-md-4">
-									<label for="input2">Page Url <span class="form-required">*</span></label>
+									<label for="input2">Page Url</label>
 									<input type="text" name="input2" value="<?php echo $input2; ?>" class="form-control" id="input2" placeholder="Enter Page Url">
 									<span id="eb3"></span>
 								</div>
